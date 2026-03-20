@@ -113,7 +113,7 @@ export default function AdminPage() {
   }
 
   async function handleUpdateWinner(id: string, status: 'approved' | 'rejected' | 'paid') {
-    await supabase.from('winners').update({ status, ...(status === 'paid' ? { paid_at: new Date().toISOString() } : {}) }).eq('id', id)
+    await supabase.from('winners').update({ status, ...(status === 'paid' ? { paid_at: new Date().toISOString() } : {}) } as any).eq('id', id)
     setWinners(prev => prev.map(w => w.id === id ? { ...w, status } : w))
   }
 
