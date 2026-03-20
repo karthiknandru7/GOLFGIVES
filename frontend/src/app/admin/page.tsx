@@ -49,7 +49,7 @@ export default function AdminPage() {
       if (!s) { router.push('/auth/login'); return }
       setSession(s)
       const { data: prof } = await supabase.from('profiles').select('*').eq('id', s.user.id).single()
-      if (prof?.role !== 'admin') { router.push('/dashboard'); return }
+      if ((prof as any)?.role !== 'admin') { router.push('/dashboard'); return }
       setAdminProfile(prof)
       await loadAll(s)
       setLoading(false)
